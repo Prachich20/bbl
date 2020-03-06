@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+
+    </style>
+</head>
+<body>
+<h2>Welcome, {{ user }}</h2>{% if user.is_authenticated %}<a href="{% url 'logout'%}">Logout</a> <br/><br/>
+<td><a href="{% url 'game:index' %}">Go to Dashboard</a><br/></td>
+<div>
+    <p><font color="red">{{error}}</font></p>
+</div>
+<table>
+    <td>
+        Name : {{team.name}}<br/>
+        Average Score: {{ team.average_score}}<br/>
+        Did the team win Championship: {{team.is_winner}}<br/>
+    </td>
+</table>
+<h3>List of players:</h3>
+<a href="{% url 'players:calculate' %}">Filter players whose average score is in the 90 percentile</a>
+<br/><br/>
+Coach : {{coach}}
+<br/><br/>
+<table>
+    <tr>
+        <td style="width:150px">Name</td>
+        <td style="width:150px">Score</td>
+        {% for obj in players %}
+    <tr>
+        <td><a href="{% url 'players:playerdetails' player=obj.name %}" }>{{obj.name}}</a></td>
+        <td>{{obj.score}}</td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+{% endif %}
+</body>
+</html>

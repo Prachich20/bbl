@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+
+    </style>
+</head>
+<body>
+<h1>Games Scoreboard</h1>
+{% if user.is_authenticated %}
+<h2>Welcome, {{ user }}</h2> <a href="{% url 'logout'%}">Logout</a>
+<ul>
+
+    <table style="width:100%;">
+        <tr>
+            <td style="width:150px">ROUND</td>
+            <td style="width:150px">TEAM 1</td>
+            <td style="width:150px">TEAM 2</td>
+            <TD style="width:150px">WINNER</TD>
+        </tr>
+        {% for obj in games %}
+        <tr>
+            <td> {% if obj.round == '4'%} Finale {% else %} {{obj.round}} {% endif %}<br/></td>
+            <td><a href="{% url 'team:teamdetails' team=obj.team1 %}">{{obj.team1}}</a><br/></td>
+            <td><a href="{% url 'team:teamdetails' team=obj.team2 %}">{{obj.team2}}</a><br/></td>
+            <td> {{obj.winner}}<br/></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    <br/><br/>
+    Final scores of each team
+    <table style="width:50%;">
+        <tr>
+            <td style="width:150px">TEAM</td>
+            <TD style="width:150px">FINAL SCORE</TD>
+        </tr>
+        {% for obj in teams %}
+        <tr>
+            <td> {{obj.name}}<br/></td>
+            <td> {{obj.average_score}}<br/></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+</ul>
+</body>
+</html>

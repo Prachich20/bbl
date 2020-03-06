@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+<h2>Welcome, {{ user }}</h2> <a href="{% url 'logout'%}">Logout</a><br/><br/>
+
+<td><a href="{% url 'game:index' %}">Go to Dashboard</a><br/></td>
+<table>
+    <td>
+        Name : {{data}}<br/>
+        Height : {{data.height}}<br/>
+        Average Score: {{ data.score}}<br/>
+    </td>
+</table>
+
+{% endif %}
+</body>
+</html>
