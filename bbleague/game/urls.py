@@ -4,4 +4,5 @@ app_name = 'game'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('', views.logout, name='logout'),
 ]

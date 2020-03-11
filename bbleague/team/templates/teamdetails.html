@@ -24,7 +24,9 @@
     </td>
 </table>
 <h3>List of players:</h3>
-<a href="{% url 'players:calculate' %}">Filter players whose average score is in the 90 percentile</a>
+ {% if not error %}
+    <a href="{% url 'players:calculate' %}">Filter players whose average score is in the 90 percentile</a>
+    {% endif %}
 <br/><br/>
 Coach : {{coach}}
 <br/><br/>
