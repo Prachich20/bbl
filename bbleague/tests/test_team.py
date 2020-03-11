@@ -6,6 +6,7 @@ from django.urls import reverse
 import pytest
 from django.test import Client, TestCase
 from profile.models import ADMIN
+from team.models import Team
 from mixer.backend.django import mixer
 
 
@@ -24,5 +25,7 @@ class Test(TestCase):
         assert response.status_code, 200
 
     def test_create_team(self):
-        team = mixer.blend('team.Team')
-        assert team.create_team
+        team = mixer.blend(Team)
+        Team().create_team(name=team.name)
+        new_Team = Team.objects.filter(name=team.name).first()
+        assert new_Team.name == team.name

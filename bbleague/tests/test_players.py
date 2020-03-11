@@ -7,6 +7,7 @@ import pytest
 from django.test import Client, TestCase
 from profile.models import ADMIN
 from mixer.backend.django import mixer
+from players.models import Players
 
 
 @pytest.mark.django_db
@@ -29,5 +30,8 @@ class Test(TestCase):
         assert response.status_code, 200
 
     def test_create_players(self):
-        player = mixer.blend('players.Players')
-        assert player.create_players
+        player = mixer.blend(Players)
+        Players().create_players(player.team, player.name, player.is_coach, player.height, player.score)
+        new_player = Players.objects.filter(name=player.name).first()
+        assert player.is_coach == new_player.is_coach
+        assert player.team == new_player.team

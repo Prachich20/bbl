@@ -4,8 +4,9 @@ import django
 django.setup()
 import pytest
 from django.test import Client, TestCase
-from profile.models import ADMIN
 from django.urls import reverse
+from profile.models import ADMIN
+from game.models import Game
 from mixer.backend.django import mixer
 
 
@@ -28,5 +29,8 @@ class Test(TestCase):
         assert response.status_code, 200
 
     def test_create_game(self):
-        game = mixer.blend('game.Game')
-        assert game.create_game
+        game = mixer.blend(Game)
+        Game().create_game(game.winner_id, game.round, game.team1_id, game.team2_id, game.is_final)
+        new_game = Game.objects.filter(winner=game.winner, team1=game.team1, is_final=game.is_final).first()
+        assert game.is_final == new_game.is_final
+        assert game.winner == new_game.winner
