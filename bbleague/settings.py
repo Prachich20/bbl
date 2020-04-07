@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-DEFAULT_PASSWORD = 'Password@12345'
+DEFAULT_PASSWORD = 'Password@12345'  # TODO: all passwords to be set a env variables when application will be deployed to the box
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 GEOIP_PATH = ROOT_PATH + '/geoip'
 LOGIN_REDIRECT_URL = '/'
