@@ -1,3 +1,6 @@
+BBL(Basket ball) league is a dummy project : Its a management system to monitor games statistics and rankings of a recent tournament.
+
+
 Steps to run application:
 1. Run load_data.py. This will generate mock data for the application.
 2. This will generate all users and roles. Settings.py include admin username and password.
